@@ -1,0 +1,40 @@
+@charset "ISO-8859-1";
+*{
+    background-color:#ffe6c9;
+    /* box-sizing: border-box; */
+}
+
+h1{
+    text-align: center;
+}
+button{
+    display: block;
+    margin: 10px;
+    padding: 6px 35px;
+    background-color: oldlace;
+    border-radius: 11px;
+    border-radius: 11px;
+}
+.reg-form{
+    display:block;
+    margin: auto;
+}
+.reg-form input{
+    margin: 10px 25px;
+    padding: 5px 8px;
+    border-radius: 7px;
+    background-color:#fffdfdb8;
+}
+.reg-form p{
+    margin: 0px 25px;
+    padding: 0;
+}
+.reg-form button{
+    margin: 10px;
+    padding: 6px 35px;
+    background-color: oldlace;
+    border-radius: 11px;
+}
+a{
+	text-decoration:none;
+}
