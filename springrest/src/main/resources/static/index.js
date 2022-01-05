@@ -1,3 +1,4 @@
+function declaration of an ajax GET call
 function getCourses() {
     console.log("in get function");
     $.ajax({
@@ -16,6 +17,7 @@ function getCourses() {
         }
     });
 }
+//function declaration to add a new course to the courses list
 function addCourse() {
     var course_name = document.getElementById('coursename').value;
     var course_id = document.getElementById('courseID').value;
@@ -25,6 +27,7 @@ function addCourse() {
     console.log(course_name);
     console.log(course_description);
     console.log(course_price);
+	//creating a json formatted payload to send
     let dataObject = {
         id: parseInt(course_id),
         title: course_name,
@@ -33,6 +36,8 @@ function addCourse() {
     };
     console.log(dataObject);
     console.log(typeof (dataObject));
+	
+	//ajax call for POST 
     $.ajax({
         url: 'http://localhost:3333/courses',
         dataType: "json",
