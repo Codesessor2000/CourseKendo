@@ -1,7 +1,10 @@
 $(document).ready(function() {
+	//make the ajax get call and initialise the grid's datasource field
 	getcall();
+	
+	//declare grid data source and defne its rest of the fields
     var gridDataSource = new kendo.data.DataSource({
-        //data: response,
+	    //define the schema of the griddata
         schema: {
             model: {
                 fields: {
@@ -13,14 +16,18 @@ $(document).ready(function() {
                 }
             }
         },
-        
+        //(optional)set the rows to be in ascending order by default
         sort: {
             field: "id",
             dir: "asc"
         }
     });
+	//define the kendo grid's fields
     $("#ordersGrid").kendoGrid({
         dataSource: gridDataSource,
+	    
+	    //declare the PUT call to update the row of the grid
+	    //remember: This call will act as a POST call if there is no matching entry for the id entered
         save: function(e) {	
 						    var data = e.model;
 						    var postdata={};
@@ -44,6 +51,8 @@ $(document).ready(function() {
 						            }
 						            });
 						},
+	    
+	    //add a DELETE call to delete the specific row where the delete button is clicked
         remove: function(e) {
     						   $.ajax({
     							   type: "DELETE",
@@ -56,11 +65,17 @@ $(document).ready(function() {
     								   });
     						   },
 
+	    // Add a 'addcourse' button on top of the grid
         toolbar:["create"],
+	    // create a popup that would appear on clicking the 'Edit' Button
         editable:"popup",
         height: 340,
+	   //(optional) keep the data sortable
         sortable: true,
+	    //(optional) keep the data filterable
         filterable: true,
+	    
+	    //Declare the column names for kendo gridand associate them with the fields in the database
         columns: [{
             field: "id",
             title: "id",
@@ -80,14 +95,17 @@ $(document).ready(function() {
         },{ field: "category",
         	title:"Category",
 			width: "120px",
+	   		//create a dropdown for this data item and call the function to choose among the values the attribute can take...
 			editor: customDropdownEditor,
 		},{
+			//add a Edit and  delete button to every row in the grid...
 			title: "Actions", 
 			command: ["edit","destroy"],
 		},
     ]
     });
 });
+//function definition to create a kendo Dropdown
 function customDropdownEditor(container, options) {
             $('<input name="' + options.field + '"/>')
                 .appendTo(container)
@@ -95,6 +113,7 @@ function customDropdownEditor(container, options) {
                     dataSource: ["Self-Learning","Youtube Video","Notes","Certification"],	
                 });
         }
+//function definition for ajax GET call
 function getcall(){
 	    $.ajax({
         url: 'http://localhost:3333/courses',
@@ -102,6 +121,7 @@ function getcall(){
         type: 'GET',
         contentType: "application/json",
         success: function (result) {
+			//(re)initiate the datasource of the kendo grid
 			$("#ordersGrid").data("kendoGrid").dataSource.data(result);
         },
         error: function (error) {
