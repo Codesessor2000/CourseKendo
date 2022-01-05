@@ -1,4 +1,4 @@
-function declaration of an ajax GET call
+//function declaration of an ajax GET call
 function getCourses() {
     console.log("in get function");
     $.ajax({
